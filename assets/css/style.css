@@ -565,6 +565,8 @@ html,.field textarea{scrollbar-width:thin;scrollbar-color:var(--yolk) var(--ink-
 .proj-body{display:grid;gap:12px;align-content:start;padding:26px 22px 22px}
 .proj-body h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.1}
 .proj-body p{margin:0;color:var(--muted);font-size:15px}
+.proj-lang{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-type);font-size:13px;color:var(--text);padding:3px 10px 3px 3px;border:1px solid #4aa3ff66;background:#4aa3ff14;transform:rotate(-1deg)}
+.proj-lang b{font-family:var(--f-block);font-weight:400;font-size:11px;letter-spacing:.08em;padding:3px 6px;background:#ece6d8;color:#0f0c19}
 .chips{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .chips li{font-family:var(--f-type);font-size:12px;padding:4px 8px;border:1px solid var(--line);background:#ffffff08}
 .proj-body .btn{justify-self:start;margin-top:4px}

@@ -538,6 +538,44 @@ html,.field textarea{scrollbar-width:thin;scrollbar-color:var(--yolk) var(--ink-
   animation:whee 1.7s ease-out forwards}
 @keyframes whee{0%{opacity:0;scale:.4}10%{opacity:1;scale:1.2}25%{scale:1}65%{opacity:1}100%{opacity:0;scale:.85;translate:0 14px}}
 
+/* 7 menu items: keep each on one line on smaller laptops */
+.nav a{white-space:nowrap}
+@media (min-width:861px) and (max-width:1320px){.nav a{padding:9px 8px;font-size:12px;letter-spacing:.05em}.nav a.cta{margin-left:4px}}
+/* projecten */
+.projects{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:26px 18px;align-items:stretch}
+@media (max-width:1100px){.projects{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.projects .proj:not(.soon){grid-column:1 / -1}}
+@media (max-width:600px){.projects{grid-template-columns:minmax(0,1fr)}}
+.proj{position:relative;background:var(--ink-2);border:1px solid var(--line);min-width:0}
+.proj:not(.soon){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);transition:transform .3s cubic-bezier(.3,1.6,.5,1),border-color .2s}
+.proj:not(.soon):hover{transform:translateY(-6px) rotate(-.6deg);border-color:#4aa3ff}
+@media (max-width:760px){.proj:not(.soon){grid-template-columns:minmax(0,1fr)}}
+.proj .tag{position:absolute;top:-14px;left:18px;z-index:2;font-family:var(--f-block);font-size:12px;letter-spacing:.1em;padding:6px 10px;background:#4aa3ff;color:#0f0c19;transform:rotate(-4deg)}
+.proj-shot{display:block;margin:22px 0 22px 22px;background:linear-gradient(180deg,#5aa9ef,#2f6fd0 70%,#244f9c);border:3px solid #ece6d8;box-shadow:0 10px 24px #000a;transform:rotate(-2deg);overflow:hidden;align-self:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.proj:hover .proj-shot{transform:rotate(1deg) scale(1.03)}
+@media (max-width:760px){.proj-shot{margin:28px 22px 0}}
+.ps-bar{display:flex;gap:5px;padding:7px 9px;background:#ece6d8}
+.ps-bar i{width:9px;height:9px;border-radius:50%;background:#d6312a}.ps-bar i:nth-child(2){background:#e8b021}.ps-bar i:nth-child(3){background:#5d9e4f}
+.ps-art{display:block;width:100%;height:auto}
+.ps-sun{fill:#ffd23f}.ps-rays{stroke:#ffd23f;stroke-width:4;stroke-linecap:round;transform-origin:130px 44px;animation:psSpin 14s linear infinite}
+.ps-cloud{fill:#f4f1ea;stroke:#c9c2b2;stroke-width:2;animation:psFloat 5s ease-in-out infinite}
+.ps-drops{stroke:#bfe1ff;stroke-width:3.5;stroke-linecap:round;animation:psRain 1.2s linear infinite}
+@keyframes psSpin{to{transform:rotate(360deg)}}
+@keyframes psFloat{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@keyframes psRain{0%{opacity:0;transform:translateY(-4px)}40%{opacity:1}100%{opacity:0;transform:translateY(8px)}}
+.proj-body{display:grid;gap:12px;align-content:start;padding:26px 22px 22px}
+.proj-body h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.1}
+.proj-body p{margin:0;color:var(--muted);font-size:15px}
+.chips{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{font-family:var(--f-type);font-size:12px;padding:4px 8px;border:1px solid var(--line);background:#ffffff08}
+.proj-body .btn{justify-self:start;margin-top:4px}
+.proj.soon{display:grid;place-content:center;justify-items:center;text-align:center;gap:6px;padding:40px 22px;border:2px dashed #ece6d84d;background:#ece6d808;min-height:220px}
+.proj.soon:nth-child(3){transform:rotate(1.2deg)}.proj.soon:nth-child(2){transform:rotate(-1deg)}
+.proj.soon .tape{position:absolute;top:-11px;left:50%;width:84px;height:22px;margin-left:-42px;background:#f2ecd6b0;transform:rotate(-3deg);box-shadow:0 2px 4px #0003}
+.proj.soon .proj-q{font-family:var(--f-display);font-size:64px;line-height:1;color:var(--yolk);animation:psBob 3s ease-in-out infinite}
+.proj.soon h3{margin:0;font-family:var(--f-block);font-weight:400;font-size:18px;letter-spacing:.08em;text-transform:uppercase}
+.proj.soon p{margin:0;color:var(--muted);font-size:14px}
+@keyframes psBob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-6px) rotate(6deg)}}
+
 /* phones and tablets: own scrollbar that starts under the menu bar */
 @media (pointer:coarse){
   html{scrollbar-width:none}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Richtpunt Weer | campus Ninove-Zottegem</title>
+  <link rel="preconnect" href="https://api.open-meteo.com" />
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-sky="clear" data-time="day">
+  <div class="sky" aria-hidden="true">
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="stars"></div>
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    <div class="cloud c4"></div>
+    <div class="particles" id="particles"></div>
+    <div class="flash"></div>
+  </div>
+
+  <div class="mascot-stage" aria-hidden="true">
+  <div class="mascot" id="mascot" data-season="default">
+    <div class="bubble"></div>
+    <svg viewBox="-10 -42 140 192">
+      <g class="m-all">
+        <g class="m-wind"><path d="M-6 70 H18"/><path d="M-10 86 H12"/><path d="M-4 102 H16"/></g>
+
+        <!-- jas -->
+        <path class="m-coat" d="M18 150 C16 112 32 96 60 96 C88 96 104 112 102 150Z"/>
+        <path class="m-coat-shade" d="M60 96 C88 96 104 112 102 150 L86 150 C90 126 78 104 60 96Z"/>
+        <path class="m-collar" d="M42 98 L60 118 L78 98 L72 94 L60 105 L48 94Z"/>
+        <path class="m-line" d="M60 118 V150"/>
+        <circle class="m-btn" cx="60" cy="130" r="2.2"/><circle class="m-btn" cx="60" cy="142" r="2.2"/>
+        <circle class="m-badge" cx="82" cy="126" r="8"/><text class="m-badge-t" x="82" y="129.4">R</text>
+        <g class="s-kerst"><path class="sa-fur" d="M40 100 Q60 124 80 100 L84 106 Q60 132 36 106Z"/><circle class="sa-fur" cx="40" cy="104" r="5"/><circle class="sa-fur" cx="52" cy="114" r="5"/><circle class="sa-fur" cx="68" cy="114" r="5"/><circle class="sa-fur" cx="80" cy="104" r="5"/></g>
+        <g class="s-pasen"><g transform="translate(34 134)"><line class="stem" x1="0" y1="0" x2="0" y2="9"/><circle class="flower-p" cx="-4" cy="-1" r="3.4"/><circle class="flower-p" cx="4" cy="-1" r="3.4"/><circle class="flower-p" cx="0" cy="-5" r="3.4"/><circle class="flower-p" cx="0" cy="3" r="3.4"/><circle class="flower-c" cx="0" cy="-1" r="2.6"/></g></g>
+
+        <!-- sjaal bij kou -->
+        <g class="m-scarf"><path d="M34 98 Q60 118 86 98 L84 112 Q60 130 36 112Z"/><path d="M72 112 L82 142 L67 138Z"/><path class="stripe" d="M38 104 Q60 122 82 104"/></g>
+
+        <!-- zwaaiende arm met voorwerp -->
+        <g class="m-arm">
+          <path class="m-sleeve" d="M92 116 Q112 102 108 82"/>
+          <g class="s-halloween" transform="translate(110 56)"><rect class="pumpkin-stem" x="-2.5" y="-14" width="5" height="6" rx="1.5"/><ellipse class="pumpkin" cx="0" cy="0" rx="13" ry="11"/><path class="pumpkin-rib" d="M-6 -10 Q-9 0 -6 10 M6 -10 Q9 0 6 10 M0 -11 V11"/><path class="pumpkin-face" d="M-7 -3 L-3 -3 L-5 -7Z M3 -3 L7 -3 L5 -7Z M-7 3 L-4 6 L-2 3 L0 6 L2 3 L4 6 L7 3 L5 8 L-5 8Z"/></g>
+          <g class="s-pasen" transform="translate(110 60)"><ellipse class="egg" cx="0" cy="0" rx="9" ry="12"/><path class="egg-z" d="M-9 -2 L-5 -6 L-1 -2 L3 -6 L7 -2 L9 -3"/><path class="egg-z" d="M-9 5 L-5 1 L-1 5 L3 1 L7 5 L9 4"/><circle class="egg-d" cx="-2" cy="-9" r="1.5"/><circle class="egg-d" cx="3" cy="10" r="1.5"/></g>
+          <g class="s-kerst"><path class="cane" d="M110 78 V48 Q110 36 120 36 Q130 36 130 46"/><path class="cane-r" d="M110 78 V48 Q110 36 120 36 Q130 36 130 46"/></g>
+          <circle class="m-skin" cx="108" cy="76" r="7.5"/>
+          <path d="M104 70 Q108 66 112 70" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="1.5"/>
+        </g>
+
+        <!-- hoofd -->
+        <ellipse class="m-skin-d" cx="30" cy="68" rx="4.6" ry="6.6"/><ellipse class="m-skin-d" cx="90" cy="68" rx="4.6" ry="6.6"/>
+        <circle class="m-skin" cx="60" cy="62" r="30"/>
+        <path class="m-hair" d="M30 62 C26 38 44 28 62 30 C80 28 96 40 90 62 C86 52 80 47 70 46 C62 52 46 50 38 54 C34 56 32 59 30 62Z"/>
+        <!-- gezicht -->
+        <g class="m-brows"><path d="M41 58 Q49 53 57 57"/><path d="M63 57 Q71 53 79 58"/></g>
+        <g class="m-eyes"><circle class="white" cx="49" cy="68" r="6.8"/><circle class="white" cx="71" cy="68" r="6.8"/><circle class="pupil" cx="50" cy="69" r="3.6"/><circle class="pupil" cx="72" cy="69" r="3.6"/><circle class="glint" cx="51.4" cy="67.4" r="1.2"/><circle class="glint" cx="73.4" cy="67.4" r="1.2"/></g>
+        <path class="m-nose" d="M60 71 Q57.5 77 61.5 78"/>
+        <circle class="m-cheek" cx="41" cy="79" r="4.6"/><circle class="m-cheek" cx="79" cy="79" r="4.6"/>
+        <path class="m-mouth" d="M50 82 Q60 93 70 82 Q60 84.5 50 82Z"/>
+        <path class="m-teeth" d="M54 83 Q60 86.5 66 83 Q60 85 54 83Z"/>
+        <g class="m-glasses"><rect x="37" y="60" width="23" height="15" rx="6.5"/><rect x="60" y="60" width="23" height="15" rx="6.5"/><path d="M58 66 H62"/><path d="M37 64 L31 62 M83 64 L89 62"/><rect class="shine" x="41" y="63" width="8" height="3" rx="1.5"/><rect class="shine" x="64" y="63" width="8" height="3" rx="1.5"/></g>
+
+        <!-- standaard: muts -->
+        <g class="s-default"><path class="beanie-top" d="M29 57 C27 22 93 22 91 57 C80 51 40 51 29 57Z"/><rect class="beanie-cuff" x="27" y="49" width="66" height="12" rx="6"/><path class="beanie-rib" d="M35 50 V60 M43 50 V60 M51 50 V60 M59 50 V60 M67 50 V60 M75 50 V60 M83 50 V60"/><circle class="pom" cx="60" cy="24" r="7.5"/><circle class="pom-hi" cx="57.5" cy="21.5" r="2.6"/></g>
+
+        <!-- halloween: heksenhoed met vleermuis -->
+        <g class="s-halloween"><ellipse class="w-hat" cx="60" cy="50" rx="42" ry="9"/><path class="w-hat" d="M36 49 C44 32 50 10 56 -12 C58 -20 66 -28 78 -32 C72 -22 72 -14 74 -4 C78 14 82 32 84 49Z"/><path class="w-band" d="M37 46 L83 46 L84 38 L40 38Z"/><rect class="w-buckle" x="55" y="36.5" width="10" height="11" rx="1.5"/><path class="w-star" d="M96 22 l2 5 5 .5 -4 3.5 1.2 5 -4.2 -2.8 -4.2 2.8 1.2 -5 -4 -3.5 5 -.5z"/><path class="w-star" d="M12 30 l1.5 3.6 3.8 .4 -2.9 2.5 .9 3.7 -3.3 -2 -3.3 2 .9 -3.7 -2.9 -2.5 3.8 -.4z" style="animation-delay:-1.3s"/>
+          <g class="bat" transform="translate(-4 4)"><path d="M0 0 C2 -4 6 -5 8 -2 C10 -5 14 -4 16 0 C13 -1 11 0 10 2 C9 1 7 1 6 2 C5 0 3 -1 0 0Z"/><g class="wing"></g></g></g>
+
+        <!-- pasen: konijnenoren -->
+        <g class="s-pasen"><g class="ear e1"><path class="ear-out" d="M40 44 C26 12 30 -26 44 -32 C58 -26 54 12 52 44Z"/><path class="ear-in" d="M43 38 C34 14 37 -16 44 -21 C51 -16 50 14 49 38Z"/></g><g class="ear e2"><path class="ear-out" d="M68 44 C66 12 62 -26 76 -32 C90 -26 94 12 80 44Z"/><path class="ear-in" d="M71 38 C70 14 69 -16 76 -21 C83 -16 86 14 77 38Z"/></g><path class="band" d="M31 52 Q60 34 89 52"/><circle class="flower-c" cx="76" cy="42" r="0"/></g>
+
+        <!-- kerst: kerstmuts -->
+        <g class="s-kerst"><path class="sa-hat" d="M29 55 C28 26 58 6 92 20 C100 28 92 42 91 55 C80 48 40 48 29 55Z"/><path class="sa-shadow" d="M62 12 C80 14 90 28 91 55 C86 52 84 51 80 50 C84 36 76 22 62 12Z"/><rect class="sa-fur" x="25" y="47" width="70" height="14" rx="7"/><circle class="sa-fur" cx="98" cy="22" r="8"/></g>
+
+        <!-- paraplu bij regen -->
+        <g class="m-umbrella"><path class="canopy" d="M2 36 Q60 -34 118 36 Q103 27 89 36 Q74 27 60 36 Q46 27 31 36 Q17 27 2 36Z"/><path class="rib" d="M60 -12 V36 M60 36 V76 Q60 86 68 84"/></g>
+
+        <!-- sneeuw bij kerst -->
+        <g class="snow s-kerst"><circle cx="8" cy="-10" r="2.2"/><circle cx="104" cy="-14" r="1.8"/><circle cx="22" cy="-26" r="1.6"/><circle cx="118" cy="4" r="2"/><circle cx="-2" cy="14" r="1.8"/></g>
+      </g>
+    </svg>
+  </div>
+  </div>
+
+  <header class="topbar">
+    <div class="logo" id="nav-logo">
+      <img src="assets/logo.png" alt="Richtpunt campus Ninove-Zottegem" />
+    </div>
+    <nav class="mainnav">
+      <a href="#" id="nav-home" class="active" data-page="home">Actueel weer</a>
+      <a href="#" id="nav-dash-ninove" data-page="dashboard-ninove">Dashboard Ninove</a>
+      <a href="#" id="nav-dash-zottegem" data-page="dashboard-zottegem">Dashboard Zottegem</a>
+    </nav>
+    <div class="station-picker">
+      <label for="station-select">Locatie:</label>
+      <select id="station-select" disabled>
+        <option>Laden…</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div id="status" class="status-msg"><div class="skeleton"><i></i><i></i><i></i></div><span>Weergegevens worden opgehaald…</span></div>
+
+    <!-- ===== Pagina 1: Actueel weer ===== -->
+    <section id="page-home" class="page" hidden>
+      <div class="campus-banner" id="campus-banner" data-campus="ninove">
+        <svg class="cb-art" viewBox="0 0 600 200" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+          <g class="art-ninove">
+            <circle cx="470" cy="60" r="90" class="a1"/><circle cx="560" cy="150" r="70" class="a2"/>
+            <path class="a3" d="M300 200 V130 H340 V90 H390 V140 H430 V110 H470 V200Z"/>
+          </g>
+          <g class="art-zottegem">
+            <path class="a1" d="M330 200 L430 40 L530 200Z"/><path class="a2" d="M420 200 L520 70 L620 200Z"/>
+            <circle cx="400" cy="46" r="26" class="a3"/>
+          </g>
+        </svg>
+        <div class="cb-text">
+          <span class="cb-kicker">Actueel weer op</span>
+          <h1 class="cb-name" id="cb-name">Richtpunt Ninove</h1>
+          <span class="cb-sub">Richtpunt campus Ninove-Zottegem</span>
+        </div>
+        <div class="cb-tabs" role="tablist" aria-label="Kies campus">
+          <button type="button" role="tab" data-campus="ninove">Ninove</button>
+          <button type="button" role="tab" data-campus="zottegem">Zottegem</button>
+          <span class="cb-thumb" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-icon" id="hero-icon-emoji" aria-hidden="true"></div>
+        <div class="hero-info">
+          <h2 id="hero-station"></h2>
+          <p class="desc" id="hero-desc"></p>
+        </div>
+        <div class="hero-temp" id="hero-temp"></div>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="label">Gevoelstemperatuur</div>
+          <div class="value" id="feel-temp"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Zon op / onder</div>
+          <div class="value" id="home-sun"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Luchtvochtigheid</div>
+          <div class="value" id="humidity"></div>
+        </div>
+      </div>
+
+      <div class="panel wind-panel" id="wind-panel">
+        <div class="panel-head">
+          <h3>Wind</h3>
+          <span class="chip" id="beaufort"></span>
+        </div>
+        <div class="wind-body">
+          <div class="compass">
+            <div class="compass-ring">
+              <span class="cp n">N</span><span class="cp o">O</span><span class="cp z">Z</span><span class="cp w">W</span>
+              <div class="needle" id="needle"></div>
+            </div>
+            <div class="compass-from" id="wind-from"></div>
+          </div>
+          <div class="wind-figures">
+            <div class="fig"><span class="num" id="wind-kmh">n.b.</span><span class="unit-label">km/u</span></div>
+            <div class="fig fig-kn"><span class="num" id="wind-kn">n.b.</span><span class="unit-label">knopen</span></div>
+            <p class="wind-gust" id="gust-line"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel drone-panel" id="drone-panel" data-verdict="go">
+        <div class="panel-head">
+          <h3>Drone-check</h3>
+          <span class="chip">kleine drone, tot 1 kg</span>
+        </div>
+        <div class="drone-body">
+          <div class="verdict">
+            <svg class="drone-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <g class="arms">
+                <line x1="30" y1="30" x2="70" y2="70" />
+                <line x1="70" y1="30" x2="30" y2="70" />
+              </g>
+              <rect class="body" x="38" y="38" width="24" height="24" rx="7" />
+              <circle class="eye" cx="50" cy="50" r="4" />
+              <g class="rotor r1"><ellipse cx="22" cy="22" rx="16" ry="3.2" /></g>
+              <g class="rotor r2"><ellipse cx="78" cy="22" rx="16" ry="3.2" /></g>
+              <g class="rotor r3"><ellipse cx="22" cy="78" rx="16" ry="3.2" /></g>
+              <g class="rotor r4"><ellipse cx="78" cy="78" rx="16" ry="3.2" /></g>
+            </svg>
+            <div class="verdict-text">
+              <div class="verdict-title" id="verdict-title">Even laden…</div>
+              <div class="verdict-sub" id="verdict-sub"></div>
+            </div>
+          </div>
+          <ul class="checks" id="drone-checks"></ul>
+        </div>
+        <p class="drone-note">Dit is een richtlijn op basis van de weergegevens, geen toestemming om te vliegen. Controleer altijd de geldende regels en no-fly zones (bijvoorbeeld rond luchthavens) en kijk zelf naar de omstandigheden ter plaatse.</p>
+      </div>
+
+      <div class="more-head">
+        <h3 class="sub-title">Meer details</h3>
+        <p class="page-sub" id="details-sub">Aanvullende weergegevens van de gekozen locatie.</p>
+      </div>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="label">Luchtdruk</div>
+          <div class="value" id="pressure"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Bewolking</div>
+          <div class="value" id="cloud-cover"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Neerslag, laatste uur</div>
+          <div class="value" id="rain-hour"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Windstoten</div>
+          <div class="value" id="wind-gusts"></div>
+          <div class="sub" id="wind-gusts-kn"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Zonsopkomst</div>
+          <div class="value" id="sunrise"></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Zonsondergang</div>
+          <div class="value" id="sunset"></div>
+        </div>
+      </div>
+
+      
+      <h3 class="sub-title">Bewolking op de kaart</h3>
+      <p class="page-sub">De schooladressen van Richtpunt Ninove en Richtpunt Zottegem met de actuele bewolkingsgraad.</p>
+      <div id="cloud-map"></div>
+
+      <p class="updated" id="updated-home"></p>
+    </section>
+
+    <!-- ===== Pagina 3 en 4: Dashboard per campus (één scherm voor op school) ===== -->
+    <section id="page-dashboard" class="page" hidden>
+      <div class="d-top">
+        <svg class="d-analog" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="face" cx="50" cy="50" r="45"/>
+          <circle class="rim" cx="50" cy="50" r="46.5"/>
+          <g class="marks" id="clock-marks"></g>
+          <g class="hand h" id="hand-h"><path d="M47.2 56 L47.8 22 L52.2 22 L52.8 56Z"/></g>
+          <g class="hand m" id="hand-m"><path d="M48 58 L48.6 9 L51.4 9 L52 58Z"/></g>
+          <g class="hand s" id="hand-s"><line x1="50" y1="64" x2="50" y2="10"/><circle cx="50" cy="20" r="2.2"/></g>
+          <circle class="pin" cx="50" cy="50" r="3"/>
+        </svg>
+        <div class="d-heading">
+          <h2 class="d-title" id="d-title"></h2>
+          <div class="d-date" id="dash-date"></div>
+        </div>
+        <div class="d-clock" id="dash-clock">--:--</div>
+      </div>
+      <div id="dash-root"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <div class="foot-col foot-about">
+        <p class="foot-lead">Een secundaire school van<br />de Provincie Oost-Vlaanderen</p>
+        <p class="foot-small">Dit weerplatform toont live gegevens voor beide campussen van Richtpunt.</p>
+      </div>
+      <div class="foot-col">
+        <h3>Locatie Ninove</h3>
+        <address>Centrumlaan 160<br />9400 Ninove</address>
+      </div>
+      <div class="foot-col">
+        <h3>Locatie Zottegem</h3>
+        <address>Sabina van Beierenlaan 35<br />9620 Zottegem</address>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      Richtpunt campus Ninove-Zottegem &middot; Weergegevens: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> en KNMI
+    </div>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

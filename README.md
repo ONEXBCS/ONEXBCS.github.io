@@ -24,6 +24,7 @@ De site draait rond Pinokkio, mijn bijnaam sinds ik klein ben: houten poppen, to
 - **Wie ben ik:** wie ik ben en waarom iedereen me Pinokkio noemt
 - **Skills:** Lua, Python, HTML & CSS, JavaScript, SQL en C++
 - **Laten maken:** custom websites, FiveM servers, Minecraft servers, Roblox games, Raspberry Pi projecten en meer
+- **Projecten:** dingen die ik al gemaakt heb, zoals mijn weer-app voor school (je kunt hem openen), en plekken voor wat nog komt
 - **Socials:** al mijn kanalen op één plek
 - **Contact:** knip je eigen brief in elkaar en verstuur hem via Gmail, je mail-app of Discord
 - **NL / EN:** wissel met één klik tussen Nederlands en Engels
@@ -52,6 +53,8 @@ assets/
   js/companion.js          houtsnijder + mini-Pinokkio die je volgt tijdens het scrollen
   js/cricket.js            de vioolspelende krekel in de footer
   images/                  ONEX-letters, logo en favicons
+projecten/
+  weer/                    mijn weer-app voor school (HTML, CSS, JS, Leaflet, Open-Meteo)
 ```
 
 ## Contact

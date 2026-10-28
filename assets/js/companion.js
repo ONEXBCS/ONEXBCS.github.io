@@ -114,6 +114,7 @@
     wie:"Dit ben ik!",
     skills:"Kijk, mijn skills!",
     bouwen:"Wat zal ik voor je bouwen?",
+    projecten:"Kijk wat ik al maakte!",
     socials:"Hier vind je me!",
     contact:"Stuur me een brief!"
   };

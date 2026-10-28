@@ -3,7 +3,7 @@
 (function(){
   const EN={
     /* nav & algemeen */
-    "Home":"Home","Wie ben ik":"About me","Skills":"Skills","Laten maken":"Services","Socials":"Socials","Contact":"Contact",
+    "Home":"Home","Wie ben ik":"About me","Skills":"Skills","Laten maken":"Services","Projecten":"Projects","Socials":"Socials","Contact":"Contact",
     "Menu openen":"Open menu","Hoofdmenu":"Main menu","Terug naar home":"Back to home",
     "Kies taal":"Choose language",
 
@@ -54,7 +54,7 @@
     "Ik leer nog elke dag bij, dus dit gaat nog omhoog.":"I'm still learning every day, so these will keep going up.",
 
     /* laten maken */
-    "LATEN MAKEN":"SERVICES",
+    "LATEN MAKEN":"SERVICES","PROJECTEN":"PROJECTS",
     "// wil je iets laten bouwen? dit kan ik voor je doen":"// want something built? here's what I can do",
     "Je eigen RP server voor GTA V.":"Your own RP server for GTA V.",
     "server opzetten":"server setup","scripts en menu's":"scripts and menus","jobs, auto's, database":"jobs, cars, database",
@@ -130,7 +130,7 @@
     "Geselecteerd, druk Ctrl+C.":"Selected, press Ctrl+C.",
     "Gekopieerd! Plak het in een mail of op Discord.":"Copied! Paste it in an email or on Discord.",
     "Mailadres gekopieerd!":"Email address copied!",
-    "Dit ben ik!":"That's me!","Kijk, mijn skills!":"Check out my skills!","Wat zal ik voor je bouwen?":"What shall I build for you?",
+    "Dit ben ik!":"That's me!","Kijk, mijn skills!":"Check out my skills!","Wat zal ik voor je bouwen?":"What shall I build for you?","Kijk wat ik al maakte!":"Look what I made!","// dingen die ik al gemaakt heb":"// things I already made","SCHOOLPROJECT":"SCHOOL PROJECT","Weer-app voor school":"Weather app for school","Een weerplatform voor de twee campussen van mijn school. Je ziet het weer van nu, de wind met een kompas, een drone-check of je mag vliegen, de bewolking op een kaart en een groot dashboard voor op een scherm op school.":"A weather platform for the two campuses of my school. You get the current weather, the wind with a compass, a drone check that tells you if you can fly, cloud cover on a map and a big dashboard for a screen at school.","Open project ↗":"Open project ↗","Weer-app openen":"Open weather app","Coming soon":"Coming soon","Hier komt mijn volgende project.":"My next project goes here.","Ik ben nog aan het bouwen.":"Still building this one.",
     "Hier vind je me!":"Find me here!","Krekel":"Cricket","Tsjirp!":"Chirp!","Wees eerlijk, Pinokkio!":"Be honest, Pinocchio!","Ik hou hem in de gaten.":"I'm keeping an eye on him.","Klik maar op Contact!":"Go ahead, click Contact!","Je hebt alles gezien! Tsjirp!":"You've seen it all! Chirp!","Een liedje voor jou!":"A little song for you!","Stuur me een brief!":"Send me a letter!","Terug naar boven!":"Back to the top!","Pinokkio, kom terug naar boven!":"Pinocchio, come back up here!","Ik kom zo, papa!":"Coming, papa!"
   };
 

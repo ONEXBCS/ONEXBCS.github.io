@@ -50,6 +50,14 @@
     place(false);
   }
 
+  /* looping animations in sections that are off screen are paused, they carry on when you scroll back */
+  if("IntersectionObserver" in window){
+    const zz=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("zz",!e.isIntersecting)),{rootMargin:"200px 0px"});
+    const startZz=()=>document.querySelectorAll("main > section, .foot").forEach(el=>zz.observe(el));
+    /* wait until the opening animations are done */
+    if(document.readyState==="complete")setTimeout(startZz,3000);else addEventListener("load",()=>setTimeout(startZz,3000));
+  }
+
   /* ransom headings */
   const styles=[
     {bg:"#cfcfcf",fg:"#141414",f:"'Abril Fatface',Georgia,serif"},
@@ -92,15 +100,21 @@
   /* nav highlight */
   const links=[...document.querySelectorAll(".nav a")];
   const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+  /* section tops are cached so scrolling does not have to measure the page every time */
+  let tops=[],maxScroll=0;
+  function measure(){tops=secs.map(s=>s?s.offsetTop:Infinity);maxScroll=document.documentElement.scrollHeight-innerHeight}
+  measure();addEventListener("load",measure);addEventListener("resize",measure);
+  if("ResizeObserver" in window)new ResizeObserver(measure).observe(document.body);
   function mark(){
     const y=scrollY+innerHeight*.4;let cur=secs[0];
-    secs.forEach(s=>{if(s&&s.offsetTop<=y)cur=s});
+    secs.forEach((s,i)=>{if(s&&tops[i]<=y)cur=s});
     links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur.id));
   }
   const header=document.querySelector(".header");
   function shrink(){header.classList.toggle("small",scrollY>40);
-    const max=document.documentElement.scrollHeight-innerHeight;header.style.setProperty("--sp",max>0?(scrollY/max).toFixed(4):0)}
-  addEventListener("scroll",()=>{mark();shrink()},{passive:true});mark();shrink();
+    const max=maxScroll;header.style.setProperty("--sp",max>0?(scrollY/max).toFixed(4):0)}
+  let navTick=false;
+  addEventListener("scroll",()=>{if(navTick)return;navTick=true;requestAnimationFrame(()=>{navTick=false;mark();shrink()})},{passive:true});mark();shrink();
 
   /* the puppet */
   const pup=document.getElementById("puppet"),bub=document.getElementById("bubble");
@@ -156,7 +170,10 @@
   /* strings follow hands and knees */
   const all=pup.querySelector(".all"),strs=[...pup.querySelectorAll(".str")];
   const pt=pup.createSVGPoint();
-  (function tie(){
+  let pupOn=true,tieRun=false;
+  function tie(){
+    if(!pupOn){tieRun=false;return}
+    tieRun=true;
     const inv=all.getCTM().inverse();
     strs.forEach(l=>{
       const g=pup.querySelector("."+l.dataset.limb);
@@ -165,7 +182,9 @@
       l.setAttribute("x2",p.x.toFixed(1));l.setAttribute("y2",p.y.toFixed(1));
     });
     requestAnimationFrame(tie);
-  })();
+  }
+  tie();
+  if("IntersectionObserver" in window)new IntersectionObserver(es=>{pupOn=es[0].isIntersecting;if(pupOn&&!tieRun)tie()}).observe(pup);
 
   /* skills: noses grow when visible */
   function grow(sk){

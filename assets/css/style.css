@@ -541,6 +541,9 @@ html,.field textarea{scrollbar-width:thin;scrollbar-color:var(--yolk) var(--ink-
 /* 7 menu items: keep each on one line on smaller laptops */
 .nav a{white-space:nowrap}
 @media (min-width:861px) and (max-width:1320px){.nav a{padding:9px 8px;font-size:12px;letter-spacing:.05em}.nav a.cta{margin-left:4px}}
+/* performance: animations in off-screen sections are paused (main.js adds .zz) */
+.zz,.zz *{animation-play-state:paused!important}
+.sky{contain:strict}
 /* projecten */
 .projects{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:26px 18px;align-items:stretch}
 @media (max-width:1100px){.projects{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.projects .proj:not(.soon){grid-column:1 / -1}}

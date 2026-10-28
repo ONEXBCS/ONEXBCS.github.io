@@ -132,26 +132,29 @@
 
   let ready=false,gepSaid=false,gepKey=null,gepT=null,replyT=null;
   function gepTalk(k){gepKey=k;gepBubble.textContent=T(k);wrap.classList.add("gep-talk");clearTimeout(gepT);gepT=setTimeout(()=>wrap.classList.remove("gep-talk"),3200);}
+  /* elements looked up once instead of on every scroll */
+  const homeEl=document.getElementById("home"),strEl=wrap.querySelector(".buddy-str"),handEl=wrap.querySelector(".mk-hand-crank");
+  const secEls={};ids.forEach(id=>secEls[id]=document.getElementById(id));
   function update(){
     const max=document.documentElement.scrollHeight-innerHeight;
     const p=max>0?Math.min(1,scrollY/max):0;
     /* hidden while the big puppet on home is visible */
-    const home=document.getElementById("home");
+    const home=homeEl;
     const show=!rigging&&(home?home.getBoundingClientRect().bottom<innerHeight*0.35:true); /* while Geppetto comes down, Pinokkio stays rolled up */
     wrap.classList.toggle("on",show);
     /* string gets longer the further you scroll */
-    const strTop=wrap.querySelector(".buddy-str").getBoundingClientRect().top;
+    const strTop=strEl.getBoundingClientRect().top;
     const pupH=wrap.clientWidth*470/240; /* puppet height from its width, ignores the hide animation */
     const room=Math.max(0,innerHeight-strTop-pupH-40);
     const drop=show?20+p*room:0; /* rolled up while you are on home */
     wrap.style.setProperty("--drop",Math.round(drop)+"px");
     wrap.style.setProperty("--spin",(drop*4).toFixed(1)+"deg");
     const ang=drop*4*Math.PI/180;
-    const hand=wrap.querySelector(".mk-hand-crank");
+    const hand=handEl;
     if(hand){hand.setAttribute("cx",(140+8*Math.cos(ang-Math.PI/4)).toFixed(1));hand.setAttribute("cy",(98+8*Math.sin(ang-Math.PI/4)).toFixed(1));}
     /* which section is in the middle of the screen */
     let sec=null;
-    for(const id of ids){const el=document.getElementById(id);if(!el)continue;const r=el.getBoundingClientRect();if(r.top<innerHeight*0.5&&r.bottom>innerHeight*0.5)sec=id;}
+    for(const id of ids){const el=secEls[id];if(!el)continue;const r=el.getBoundingClientRect();if(r.top<innerHeight*0.5&&r.bottom>innerHeight*0.5)sec=id;}
     const atBottom=show&&p>0.985;
     if(!ready){
       /* just loaded or refreshed: remember where we are, but stay quiet */

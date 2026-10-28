@@ -61,6 +61,8 @@
     {bg:"#0f0c19",fg:"#ece6d8",f:"'Bowlby One','Arial Black',sans-serif",b:1},
     {bg:"#c88a4b",fg:"#2a170a",f:"'Abril Fatface',Georgia,serif"}
   ];
+  /* the italic serif makes a Q look like a 2, so a Q gets a plain style instead */
+  function pickStyle(ch,i){let st=styles[i];if(st.i&&/[QqGg2]/.test(ch))st=styles[(i+1)%styles.length];return st}
   function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280}}
   function renderRansoms(){document.querySelectorAll('.ransom[data-word]').forEach(el=>{
     el.textContent="";
@@ -68,7 +70,7 @@
     T(el.dataset.word).split(" ").forEach(part=>{
       const w=document.createElement("span");w.className="w";w.setAttribute("aria-hidden","true");
       [...part].forEach(ch=>{
-        const st=styles[Math.floor(r()*styles.length)];
+        const st=pickStyle(ch,Math.floor(r()*styles.length));
         const rot=+(r()*12-6).toFixed(1), y=Math.round(r()*14-7);
         const l=document.createElement("span");l.className="l";l.textContent=ch;
         l.style.background=st.bg;l.style.color=st.fg;l.style.fontFamily=st.f;
@@ -202,7 +204,7 @@
     word.toUpperCase().split(" ").forEach(part=>{
       const w=document.createElement("span");w.className="w";
       [...part].forEach(ch=>{
-        const st=styles[Math.floor(r()*styles.length)];
+        const st=pickStyle(ch,Math.floor(r()*styles.length));
         const l=document.createElement("span");l.className="l";l.textContent=ch;
         l.style.background=st.bg;l.style.color=st.fg;l.style.fontFamily=st.f;
         if(st.i)l.style.fontStyle="italic";

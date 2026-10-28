@@ -144,8 +144,9 @@ section{min-height:100svh;display:flex;align-items:center;padding-block:calc(var
 .rig-on .nav a:nth-child(1){animation-delay:.15s}.rig-on .nav a:nth-child(2){animation-delay:.22s}
 .rig-on .nav a:nth-child(3){animation-delay:.29s}.rig-on .nav a:nth-child(4){animation-delay:.36s}
 .rig-on .nav a:nth-child(5){animation-delay:.43s}.rig-on .nav a:nth-child(6){animation-delay:.5s}
-.rig-on .lang,.rig-on .burger{animation-delay:.58s}
-.rig-on .buddy{--from:-240px;animation:rigDrop 1.2s linear .7s both}
+.rig-on .nav a:nth-child(7){animation-delay:.57s}.rig-on .nav a:nth-child(8){animation-delay:.64s}
+.rig-on .lang,.rig-on .burger{animation-delay:.72s}
+.rig-on .buddy{--from:-240px;animation:rigDrop 1.2s linear .84s both}
 .rig-on .header .logo,.rig-on .lang,.rig-on .burger{position:relative}
 .rope{position:absolute;left:50%;bottom:100%;width:1.5px;height:120vh;margin-left:-.75px;background:linear-gradient(#e6dfcf00,#e6dfcfdd 30%);
   pointer-events:none;transform-origin:top;animation:ropeUp .5s ease-in both;animation-delay:calc(var(--rd,0s) + 1.3s)}

@@ -101,11 +101,11 @@
     const tm=wrap.querySelector(".toymaker").getBoundingClientRect(),wr=wrap.getBoundingClientRect();
     const r=document.createElement("i");r.className="rope";r.setAttribute("aria-hidden","true");
     const len=innerHeight*1.2,y=tm.top-wr.top+tm.height*.62;
-    r.style.cssText=`bottom:auto;top:${y-len}px;height:${len}px;left:${tm.left-wr.left+tm.width*.36}px;z-index:2;--rd:.7s`;
+    r.style.cssText=`bottom:auto;top:${y-len}px;height:${len}px;left:${tm.left-wr.left+tm.width*.36}px;z-index:2;--rd:.84s`;
     wrap.appendChild(r);
     /* first Geppetto lands, then he lets Pinokkio down */
     rigging=true;
-    setTimeout(()=>{rigging=false;wrap.classList.add("unroll");update();ready=true;setTimeout(()=>wrap.classList.remove("unroll"),1300)},2000);
+    setTimeout(()=>{rigging=false;wrap.classList.add("unroll");update();ready=true;setTimeout(()=>wrap.classList.remove("unroll"),1300)},2140);
   }
   const bubble=wrap.querySelector(".buddy-bubble"),gepBubble=wrap.querySelector(".gep-bubble");
 

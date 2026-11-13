@@ -1536,3 +1536,9 @@ body.is-dashboard { overflow-x: hidden; }
 /* weericoon netjes gecentreerd boven het label */
 .d-hero .hero-right { align-items: center; text-align: center; }
 .d-hero .hero-right .ico { display: block; text-align: center; transform: none; }
+
+/* ---------- Laden: footer blijft onderaan, de laadmelding staat in het midden ---------- */
+body { display: flex; flex-direction: column; }
+main { flex: 1 0 auto; }
+.status-msg:not([hidden]) { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; }
+footer { flex-shrink: 0; }

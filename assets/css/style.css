@@ -592,8 +592,12 @@ html,.field textarea{scrollbar-width:thin;scrollbar-color:var(--yolk) var(--ink-
 @media (pointer:fine){.mscroll{display:none}}
 
 /* ASTIX project card */
-@media (min-width:1101px){.projects{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}
-.proj.soon:nth-child(2){transform:rotate(-1deg)}.proj.soon:nth-child(4){transform:rotate(1.2deg)}
+@media (min-width:1101px){
+  .projects{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .proj:not(.soon){grid-template-columns:minmax(0,1fr);align-content:start}
+  .proj:not(.soon) .proj-shot{margin:30px 26px 0}
+}
+.proj.soon:nth-child(3){transform:rotate(1.2deg)}
 .ps-astix{background:radial-gradient(120% 90% at 50% 0%,#14295a,#081232 60%,#03060f)}
 .pa-stars circle{fill:#dfe7f3;opacity:.8}
 .pa-earth{fill:#0c1a3a}.pa-rim{fill:none;stroke:#6f95d0;stroke-width:1.5}

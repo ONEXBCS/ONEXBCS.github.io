@@ -590,3 +590,16 @@ html,.field textarea{scrollbar-width:thin;scrollbar-color:var(--yolk) var(--ink-
   .mscroll.show{opacity:.85;transition:opacity .1s}
 }
 @media (pointer:fine){.mscroll{display:none}}
+
+/* ASTIX project card */
+@media (min-width:1101px){.projects{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}
+.proj.soon:nth-child(2){transform:rotate(-1deg)}.proj.soon:nth-child(4){transform:rotate(1.2deg)}
+.ps-astix{background:radial-gradient(120% 90% at 50% 0%,#14295a,#081232 60%,#03060f)}
+.pa-stars circle{fill:#dfe7f3;opacity:.8}
+.pa-earth{fill:#0c1a3a}.pa-rim{fill:none;stroke:#6f95d0;stroke-width:1.5}
+.pa-canopy{fill:#f1efe9}.pa-stripe{fill:none;stroke:#4c78bf;stroke-width:3}
+.pa-cord{stroke:#dfe7f3aa;stroke-width:.8}
+.pa-can{fill:#c9ced6}.pa-band{fill:#1a2b52}
+.pa-sat{transform-origin:100px 12px;animation:paSway 5s ease-in-out infinite}
+@keyframes paSway{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(4px)}}
+@media (prefers-reduced-motion:reduce){.pa-sat{animation:none}}

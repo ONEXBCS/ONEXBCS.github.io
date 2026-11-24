@@ -1,0 +1,40 @@
+/* ONEX · Christmas makeover. Everything is scoped to html.kerst (set by kerst.js until 6 January). */
+
+/* string of lights hanging under the menu bar */
+.kerst .xm-lights{position:absolute;left:0;right:0;top:100%;height:44px;margin-top:-3px;pointer-events:none;overflow:hidden;z-index:2}
+.kerst .xm-lights svg{display:block}
+.kerst .xm-b path{filter:drop-shadow(0 0 4px var(--c));animation:xmTwinkle 2.4s ease-in-out infinite;animation-delay:var(--dl)}
+@keyframes xmTwinkle{0%,100%{opacity:1}45%{opacity:.35;filter:none}55%{opacity:.35;filter:none}}
+.kerst .progress{bottom:-6px}
+
+/* Santa hats */
+.kerst .logo{position:relative}
+.kerst .xm-lhat{position:absolute;left:-6px;top:6px;width:30px;pointer-events:none;transform:rotate(-14deg);z-index:2}
+.kerst .xm-lhat svg{display:block;width:100%;height:auto}
+.kerst .foot .xm-lhat{left:-4px;top:4px;width:34px}
+.kerst .xm-hat{pointer-events:none}
+
+/* paper tag on a string in the hero */
+.kerst .hero .copy{position:relative}
+.kerst .xm-tag{position:absolute;right:4%;top:-118px;display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;animation:xmSwing 4.6s ease-in-out infinite;pointer-events:none;z-index:3}
+.kerst .xm-str{display:block;width:1.4px;height:118px;background:#d9d1bf;opacity:.8}
+.kerst .xm-card{position:relative;font:400 15px/1 var(--f-type);color:#2a1606;background:var(--paper);padding:10px 14px 9px;border-radius:3px;box-shadow:0 6px 14px #0008;white-space:nowrap}
+.kerst .xm-card::before{content:"";position:absolute;left:50%;top:5px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#c8242b;box-shadow:inset 0 0 0 2px #6e1014}
+.kerst .xm-card{padding-top:18px}
+@keyframes xmSwing{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-4deg)}}
+@media (max-width:900px){.kerst .xm-tag{display:none}}
+
+/* snow */
+.kerst .xm-snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45}
+
+/* snow caps on the project cards and buttons */
+.kerst .proj:not(.soon)::after{content:"";position:absolute;left:-3px;right:-3px;top:-9px;height:16px;pointer-events:none;
+  background:radial-gradient(14px 10px at 8% 100%,#f4f1ea 98%,#0000),radial-gradient(22px 12px at 28% 100%,#f4f1ea 98%,#0000),radial-gradient(18px 10px at 52% 100%,#f4f1ea 98%,#0000),radial-gradient(26px 13px at 76% 100%,#f4f1ea 98%,#0000),radial-gradient(16px 9px at 95% 100%,#f4f1ea 98%,#0000),linear-gradient(#0000 60%,#f4f1ea 60%);
+  border-radius:6px 6px 0 0;filter:drop-shadow(0 2px 2px #0006)}
+.kerst .btn:not(.ghost){position:relative}
+.kerst .btn:not(.ghost)::before{content:"";position:absolute;left:4px;right:4px;top:-5px;height:9px;border-radius:9px 9px 4px 4px;background:#f4f1ea;box-shadow:0 1px 2px #0005;pointer-events:none}
+
+/* footer wish */
+.kerst .xm-foot{margin:18px 0 0;text-align:center;font-family:var(--f-type);font-size:15px;color:var(--paper);opacity:.9}
+
+@media (prefers-reduced-motion:reduce){.kerst .xm-b path,.kerst .xm-tag{animation:none}}

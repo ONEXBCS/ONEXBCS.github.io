@@ -22,9 +22,10 @@ const PAPER=[
   {bg:"#d6312a",fg:"#ece6d8",f:"'Playfair Display',Georgia,serif",i:1},
   {bg:"#c88a4b",fg:"#2a170a",f:"'Abril Fatface',Georgia,serif"}
 ];
+const COLS=["#ff5a4e","#ffc94a","#5fd38a","#6aa2ff","#ff8fc4"];
 function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280}}
 
-/* --- twine garland with cut-paper flags and stars under the menu bar --- */
+/* --- string of lights on twine under the menu bar --- */
 const header=document.querySelector(".header");
 let gW=0;
 function garland(){
@@ -37,12 +38,11 @@ function garland(){
   for(let i=0;i<n;i++){
     const x0=i*seg,x1=x0+seg;
     d+=` Q${x0+seg/2} ${2+sag*2} ${x1} 2`;
-    const per=w<700?4:6;
+    const per=w<700?3:4;
     for(let k=1;k<per;k++){
       const t=k/per,x=x0+seg*t,y=2+4*sag*t*(1-t);
-      const p=PAPER[Math.floor(r()*PAPER.length)],star=r()<.18;
-      const rot=(r()*10-5).toFixed(1),dl=(r()*3).toFixed(2),sz=star?(w<700?18:22):(w<700?16:20);
-      items+=`<i class="xm-f${star?" xm-star":""}" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--bg:${p.bg};--s:${sz}px;--r:${rot}deg;--dl:-${dl}s"></i>`;
+      const c=COLS[Math.floor(r()*COLS.length)],rot=(r()*16-8).toFixed(1),dl=(r()*3).toFixed(2);
+      items+=`<i class="xm-bulb" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--c:${c};--r:${rot}deg;--dl:-${dl}s"></i>`;
     }
   }
   el.innerHTML=`<svg width="${w}" height="40" viewBox="0 0 ${w} 40"><path d="${d}" fill="none" stroke="#d9d1bf" stroke-width="1.3" opacity=".8"/></svg>${items}`;
@@ -95,7 +95,7 @@ function foot(){
   if(f&&!p){p=document.createElement("p");p.className="xm-foot";f.appendChild(p)}
   if(p)p.textContent=T[L()].foot;
 }
-new MutationObserver(()=>{banner();foot()}).observe(root,{attributes:true,attributeFilter:["lang"]});
+new MutationObserver(foot).observe(root,{attributes:true,attributeFilter:["lang"]});
 
 /* --- paper snow: little torn scraps and a few cut-out snowflakes --- */
 function snow(){
@@ -139,6 +139,6 @@ function snow(){
   document.addEventListener("visibilitychange",go);go();
 }
 
-function start(){garland();banner();puppetHat();logoHats();foot();snow();addEventListener("resize",garland)}
+function start(){garland();foot();snow();addEventListener("resize",garland)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
